@@ -2,7 +2,6 @@
 
 ## Members:
 
-- Daniel
 - Daniel Welicki
 - Ronan Smith
 - Joshua Wu
