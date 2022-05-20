@@ -1,3 +1,5 @@
+package src;
+
 import java.util.ArrayList;
 
 public class Virus {
@@ -6,7 +8,8 @@ public class Virus {
     private boolean[] susceptibilities;
     private int incubation;
     private int resistance;
-    public Virus(double infectability, double mortality, boolean[] susceptibilities, int incubation, int resistance){
+
+    public Virus(double infectability, double mortality, boolean[] susceptibilities, int incubation, int resistance) {
         this.infectability = infectability;
         this.mortality = mortality;
         this.susceptibilities = susceptibilities;
@@ -33,8 +36,5 @@ public class Virus {
     public int getResistance() {
         return resistance;
     }
-
-    
-
 
 }
