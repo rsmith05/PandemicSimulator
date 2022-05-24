@@ -2,16 +2,32 @@ package src;
 
 import java.util.*;
 
-public class Person {
-   private static int numCases = 0;
+class Person {
+   private static int numInfected = 0;
    private static int numDeaths = 0;
    private static int totalPeople = 0;
-   private static int year = 0;
    private int age;
-   private boolean preCondition;
+   private int ageInDays;
+   private int preCondition; //1-20 subtracted from immunity lvl
+   private int immunityValue; //out of 100
    private boolean infected;
+   private boolean recovered;
+   
+   public Person(){
+      ageInDays = (int) (Math.random() * 29199);
+      age = ageInDays / 365;
+      if(0.8 < Math.random()){  // 20% chance for someone to have precondition
+         preCondition = (int) ((Math.random() * 19) + 1);
+      }
+      else{
+         preCondition = 0;
+      }
+      infected = false;
+      recovered = false;
+      totalPeople++;
+   }
 
-   public Person(int age, boolean preCondition) {
+   public Person(int age, int preCondition) {
       this.age = age;
       this.preCondition = preCondition;
       infected = false;
@@ -19,27 +35,50 @@ public class Person {
    }
 
    public void generateAge() {
-      int rand = (int) ((Math.random() * 79) + 1);
-      this.age = rand;
-      if (year >= 1) {
-         age += year;
-      }
-      if (age > 80) {
-         die();
-      }
+      int rand = (int) (Math.random() * 29199);
+      this.ageInDays = rand;
+      this.age = rand/365;
    }
 
    public void infect() {
-      int rand = (int) (Math.random() + 1);
-      if (rand == 1) {
-         this.infected = true;
-      }
+      infected = true;
+      numInfected++;
+   }
+   
+   public void survive() {
+      infected = false;
+      numInfected--;
+      recovered = true;
    }
 
    public void die() {
-      this.age = 0;
-      this.preCondition = false;
-      this.infected = false;
+      infected = false;
+      numDeaths++;
+      numInfected--;
       totalPeople--;
+   }
+   
+   public int getAge(){
+      return age;
+   }
+   
+   public int getAgeInDays(){
+      return ageInDays;
+   }
+   
+   public int getPreCondition(){
+      return preCondition;
+   }
+   
+   public boolean getInfected(){
+      return infected;
+   }
+   
+   public int getImmunityValue(){
+      return immunityValue;
+   }
+   
+   public boolean getRecovered(){
+      return recovered;
    }
 }
